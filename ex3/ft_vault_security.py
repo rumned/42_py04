@@ -43,7 +43,7 @@ if __name__ == "__main__":
           "to a new file:")
     result = secure_archive('new.txt',
                             'append',
-                            secure_archive('test.txt')[1])
+                            secure_archive('test2.txt')[1])
     print(f"{result}")
 
     print("\nUsing 'secure_archive' with an action "
