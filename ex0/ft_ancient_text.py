@@ -13,7 +13,7 @@ def get_file_to_open() -> str:
 if __name__ == '__main__':
 
     if len(sys.argv) < 2:
-        print('Usage: ft_ancient_text.py <file>')
+        print(f'Usage: {sys.argv[0]} <file>')
     else:
         try:
             content = get_file_to_open()

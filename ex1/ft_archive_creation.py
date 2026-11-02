@@ -10,35 +10,37 @@ def get_file_to_open() -> str:
     return content
 
 
-def write_char_to_line(content: str) -> str:
-    lines = [line + '#' for line in content.split('\n')]
-    lines = '\n'.join(lines)
-    print(f'Transform data:\n---{lines}\n---')
-    new_file = input('Enter new file name or:'
-                     'leave empty to discard read text:', end='')
+def write_char_to_line(content: str) -> str | None:
+    new_file = input('Enter new file name or '
+                     'leave empty to discard read text: ')
     if new_file:
-        new_file = open(new_file, 'w')
-        new_file = lines
-        print(f"Data saved in '{new_file}'")
-        return new_file
+        lines = [line + '#' for line in content.split('\n')]
+        lines_joined = '\n'.join(lines)
+        f = open(new_file, 'w')
+        f.write(lines_joined)
+        f.close()
+        print(f'\nTransform data:\n---\n{lines}\n---')
+        print(f"Saving data to '{new_file}'")
+        print(f"Data saved in file '{new_file}'.")
+        return lines_joined
     else:
         print('Not saving data.')
+    return None
 
 
 if __name__ == '__main__':
 
     if len(sys.argv) < 2:
-        print('Usage: ft_ancient_text.py <file>')
+        print(f'Usage: {sys.argv[0]} <file>')
     else:
         try:
             content = get_file_to_open()
-            content = write_char_to_line(content)
-        except Exception as e:
-            print(f"Error opening file '{sys.argv[1]}' : {e}")
-        else:
-            print("=== Cyber Archives Recovery ===")
+            print("=== Cyber Archives Recovery & Preservation ===")
             print(f"Accessing file '{sys.argv[1]}'")
             print("---\n")
             print(content)
             print("\n---")
-            print(f"File '{sys.argv[1]}' closed.")
+            print(f"File '{sys.argv[1]}' closed.\n")
+            lines = write_char_to_line(content)
+        except Exception as e:
+            print(f"Error opening file '{sys.argv[1]}' : {e}")
