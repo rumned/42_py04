@@ -12,7 +12,17 @@ def get_file_to_open() -> str:
 
 def write_char_to_line(content: str) -> str:
     lines = [line + '#' for line in content.split('\n')]
-    return '\n'.join(lines)
+    lines = '\n'.join(lines)
+    print(f'Transform data:\n---{lines}\n---')
+    new_file = input('Enter new file name or:'
+                     'leave empty to discard read text:', end='')
+    if new_file:
+        new_file = open(new_file, 'w')
+        new_file = lines
+        print(f"Data saved in '{new_file}'")
+        return new_file
+    else:
+        print('Not saving data.')
 
 
 if __name__ == '__main__':
